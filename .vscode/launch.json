@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: CareerScan Flask App",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.py",
+      "console": "integratedTerminal",
+      "jinja": true,
+      "env": {
+        "FLASK_ENV": "development"
+      }
+    },
+    {
+      "name": "Python: Run Test Suite",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/test_app.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

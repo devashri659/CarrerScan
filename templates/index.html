@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerScan — AI-Powered Job Offer Risk Checker</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- CareerScan Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== TOP NAVIGATION BAR ==================== -->
+  <header class="top-navbar">
+    <div class="top-nav-left">
+      <!-- Mobile Sidebar Toggle -->
+      <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="Toggle navigation menu">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <!-- CareerScan Logo -->
+      <a href="#" class="brand-container" id="brandLogoBtn">
+        <div class="brand-icon">
+          <i data-lucide="briefcase"></i>
+        </div>
+        <span class="brand-title">CareerScan</span>
+      </a>
+
+      <!-- Thin Vertical Divider -->
+      <div class="nav-divider"></div>
+
+      <!-- Topbar Subtitle -->
+      <span class="brand-subtitle">Job Offer Risk Checker</span>
+    </div>
+
+    <div class="top-nav-right">
+      <!-- Notification Icon -->
+      <div class="nav-icon-btn" id="notificationBtn" title="Notifications">
+        <i data-lucide="bell"></i>
+        <span class="notification-badge-dot"></span>
+      </div>
+
+      <!-- Profile Avatar -->
+      <div class="user-profile-wrapper" id="profileWrapper">
+        <button class="user-profile-btn" id="userProfileBtn" aria-label="User Profile">
+          <div class="avatar-circle">
+            <i data-lucide="user"></i>
+          </div>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="dropdown-header">
+            <strong>Engineering Project</strong>
+            <small>CareerScan v1.0 • Final Year</small>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item" data-navigate="home">
+            <i data-lucide="home"></i> Home Scanner
+          </a>
+          <a href="#" class="dropdown-item" data-navigate="history">
+            <i data-lucide="history"></i> Scan History
+          </a>
+          <a href="#" class="dropdown-item" data-navigate="about">
+            <i data-lucide="info"></i> About Project
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN APPLICATION LAYOUT ==================== -->
+  <div class="app-body">
+
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <aside class="left-sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <!-- 1. Home -->
+        <a href="#home" class="sidebar-item active" id="navHome" data-view="home">
+          <i data-lucide="home" class="sidebar-icon"></i>
+          <span class="sidebar-label">Home</span>
+        </a>
+
+        <!-- 2. History -->
+        <a href="#history" class="sidebar-item" id="navHistory" data-view="history">
+          <i data-lucide="history" class="sidebar-icon"></i>
+          <span class="sidebar-label">History</span>
+          <span class="history-count-badge" id="historyCounter">0</span>
+        </a>
+
+        <!-- 3. About -->
+        <a href="#about" class="sidebar-item" id="navAbout" data-view="about">
+          <i data-lucide="info" class="sidebar-icon"></i>
+          <span class="sidebar-label">About</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Divider -->
+      <div class="sidebar-divider"></div>
+
+      <!-- Sidebar Footer Info -->
+      <div class="sidebar-footer">
+        <div class="sidebar-status-box">
+          <div class="status-indicator-dot"></div>
+          <div>
+            <div class="status-title">Dual-Engine Active</div>
+            <div class="status-desc">Heuristics + ML TF-IDF</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ==================== MAIN WORKSPACE ==================== -->
+    <main class="main-workspace" id="mainWorkspace">
+
+      <!-- ==================== VIEW 1: HOME ==================== -->
+      <section class="view-section active" id="viewHome">
+        <div class="content-container">
+
+          <!-- Section A: Hero Area -->
+          <div class="hero-section">
+            <div class="hero-left-col">
+              <h1 class="hero-heading">
+                Check Before<br>
+                <span class="highlight-blue">You Trust.</span>
+              </h1>
+              <div class="hero-accent-line"></div>
+              <p class="hero-description">
+                Analyze job offers for potential warning signs and stay safe from scams.
+              </p>
+
+              <!-- Quick Demo Samples Selector -->
+              <div class="sample-pills-wrapper">
+                <span class="sample-pills-label">Quick test samples:</span>
+                <div class="sample-pills-list">
+                  <button type="button" class="sample-pill" data-sample="fake_check">
+                    <i data-lucide="alert-triangle"></i> Fake Check Scam
+                  </button>
+                  <button type="button" class="sample-pill" data-sample="telegram_interview">
+                    <i data-lucide="message-square"></i> Telegram Interview
+                  </button>
+                  <button type="button" class="sample-pill" data-sample="internship_fee">
+                    <i data-lucide="credit-card"></i> Internship Fee Scam
+                  </button>
+                  <button type="button" class="sample-pill" data-sample="legitimate_offer">
+                    <i data-lucide="shield-check"></i> Legitimate Offer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-right-col">
+              <div class="hero-illustration-wrapper">
+                <img src="/static/images/hero-illustration.svg" alt="CareerScan Job Offer Security Check" class="hero-illustration">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section B: Job Offer Analysis Form -->
+          <div class="analysis-form-card">
+            <form id="jobScanForm" novalidate>
+
+              <!-- Top Bar of Form: Field Label + PDF Upload Option -->
+              <div class="form-header-row">
+                <label for="offerText" class="form-label">
+                  <i data-lucide="file-text"></i> Job Offer or Recruitment Message Text
+                </label>
+                <div class="file-upload-badge-wrapper">
+                  <label for="pdfFileInput" class="upload-file-btn" title="Upload PDF or Text offer letter">
+                    <i data-lucide="upload-cloud"></i> Upload PDF / Document
+                  </label>
+                  <input type="file" id="pdfFileInput" accept=".pdf,.txt" style="display: none;">
+                  <span id="fileNameDisplay" class="file-name-tag" style="display: none;"></span>
+                </div>
+              </div>
+
+              <!-- Field 1: Job offer text textarea -->
+              <div class="textarea-wrapper">
+                <div class="textarea-icon">
+                  <i data-lucide="file-search"></i>
+                </div>
+                <textarea 
+                  id="offerText" 
+                  name="offerText" 
+                  class="custom-textarea" 
+                  placeholder="Paste your job description, recruiter email, or offer letter text here..." 
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Field 2: Optional company and recruiter details -->
+              <div class="optional-fields-section">
+                <label class="form-label">Company / recruiter (optional)</label>
+                <div class="two-columns-row">
+                  <!-- Left: Company name -->
+                  <div class="input-with-icon">
+                    <div class="input-icon">
+                      <i data-lucide="building-2"></i>
+                    </div>
+                    <input 
+                      type="text" 
+                      id="companyName" 
+                      name="companyName" 
+                      class="custom-input" 
+                      placeholder="Company name"
+                    >
+                  </div>
+
+                  <!-- Right: Recruiter email -->
+                  <div class="input-with-icon">
+                    <div class="input-icon">
+                      <i data-lucide="mail"></i>
+                    </div>
+                    <input 
+                      type="email" 
+                      id="recruiterEmail" 
+                      name="recruiterEmail" 
+                      class="custom-input" 
+                      placeholder="Recruiter email"
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Field 3: Analyze button -->
+              <div class="submit-button-row">
+                <button type="submit" class="analyze-btn" id="analyzeBtn">
+                  <span class="btn-content">
+                    <i data-lucide="search" class="btn-icon"></i>
+                    <span class="btn-text">Analyze Job Offer</span>
+                  </span>
+                  <span class="btn-spinner" style="display: none;">
+                    <i data-lucide="loader-2" class="spin"></i> Analyzing Offer...
+                  </span>
+                </button>
+              </div>
+
+              <!-- Small Privacy text -->
+              <div class="privacy-note">
+                <i data-lucide="lock" class="privacy-icon"></i>
+                <span>Your submissions are analyzed securely. No sensitive data is sold, transferred, or shared.</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Section C: Results Section (Appears after analysis) -->
+          <div class="results-section-wrapper" id="resultsSection" style="display: none;">
+            
+            <div class="results-header-bar">
+              <div>
+                <h2 class="results-main-title">Risk Assessment Report</h2>
+                <div class="results-meta-subtitle" id="resultsMetaSubtitle">Evaluated in real-time</div>
+              </div>
+              <div class="results-action-buttons">
+                <button type="button" class="secondary-btn" id="printReportBtn">
+                  <i data-lucide="printer"></i> Print / Save PDF
+                </button>
+                <button type="button" class="secondary-btn" id="newScanBtn">
+                  <i data-lucide="rotate-ccw"></i> New Scan
+                </button>
+              </div>
+            </div>
+
+            <!-- Score Banner Card -->
+            <div class="score-banner-card" id="scoreBanner">
+              <div class="score-visual-gauge">
+                <div class="circular-chart-container">
+                  <svg viewBox="0 0 36 36" class="circular-chart" id="circularChart">
+                    <path class="circle-bg"
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <path class="circle" id="circleStroke"
+                      stroke-dasharray="0, 100"
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                  </svg>
+                  <div class="chart-score-text">
+                    <span class="score-number" id="riskScoreNumber">0</span><span class="score-percent">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="score-details-col">
+                <div class="badge-row">
+                  <span class="risk-verdict-badge" id="riskBadge">LOW RISK</span>
+                  <span class="flags-count-tag" id="flagsCountTag">0 Red Flags Detected</span>
+                </div>
+                <h3 class="verdict-headline" id="verdictHeadline">Likely Legitimate Opportunity</h3>
+                <p class="verdict-summary" id="verdictSummary">
+                  This offer exhibits standard hiring language. Always practice due diligence before sharing sensitive identity information.
+                </p>
+              </div>
+            </div>
+
+            <!-- Three Metric Insight Cards -->
+            <div class="insights-grid">
+              <div class="insight-card">
+                <div class="insight-header">
+                  <span class="insight-title">Machine Learning NLP</span>
+                  <i data-lucide="cpu" class="insight-icon"></i>
+                </div>
+                <div class="insight-value" id="mlScamProbVal">0%</div>
+                <div class="insight-label">Scam probability calculated by TF-IDF & Logistic Regression model.</div>
+              </div>
+
+              <div class="insight-card">
+                <div class="insight-header">
+                  <span class="insight-title">Heuristic Rule Match</span>
+                  <i data-lucide="list-checks" class="insight-icon"></i>
+                </div>
+                <div class="insight-value" id="heuristicScoreVal">0/100</div>
+                <div class="insight-label">Pattern matching score across 5 major fraud risk vectors.</div>
+              </div>
+
+              <div class="insight-card">
+                <div class="insight-header">
+                  <span class="insight-title">Domain & Sender Status</span>
+                  <i data-lucide="mail-check" class="insight-icon"></i>
+                </div>
+                <div class="insight-value-small" id="domainStatusVal">Verified</div>
+                <div class="insight-label" id="domainStatusDesc">Recruiter email domain validation.</div>
+              </div>
+            </div>
+
+            <!-- Key Red Flags Detected -->
+            <div class="report-block">
+              <h3 class="block-title">
+                <i data-lucide="alert-circle" class="block-title-icon"></i>
+                Specific Red Flags Detected (<span id="redFlagsCountLabel">0</span>)
+              </h3>
+              <div class="red-flags-container" id="redFlagsContainer">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Actionable Recommendations & Next Steps -->
+            <div class="report-block">
+              <h3 class="block-title">
+                <i data-lucide="shield" class="block-title-icon"></i>
+                Recommended Safety Actions & Verification Steps
+              </h3>
+              <ul class="recommendations-list" id="recommendationsList">
+                <!-- Rendered dynamically -->
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 2: HISTORY ==================== -->
+      <section class="view-section" id="viewHistory" style="display: none;">
+        <div class="content-container">
+          <div class="section-title-row">
+            <div>
+              <h1 class="view-heading">Scan History</h1>
+              <p class="view-subheading">View, re-examine, and manage your previous job offer assessments stored in SQLite.</p>
+            </div>
+            <div class="history-actions-bar">
+              <button type="button" class="danger-outline-btn" id="clearAllHistoryBtn">
+                <i data-lucide="trash-2"></i> Clear All History
+              </button>
+            </div>
+          </div>
+
+          <!-- History Filter Tabs -->
+          <div class="history-filter-tabs">
+            <button class="filter-tab-btn active" data-filter="all">All Scans</button>
+            <button class="filter-tab-btn" data-filter="high">High Risk</button>
+            <button class="filter-tab-btn" data-filter="moderate">Moderate Risk</button>
+            <button class="filter-tab-btn" data-filter="low">Low Risk</button>
+          </div>
+
+          <!-- History Table / Cards -->
+          <div class="history-table-card">
+            <div class="table-responsive">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Date & Time</th>
+                    <th>Company</th>
+                    <th>Recruiter Email</th>
+                    <th>Offer Snippet</th>
+                    <th>Risk Score</th>
+                    <th>Verdict</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                  <tr>
+                    <td colspan="7" class="empty-state-cell">
+                      <div class="empty-state-box">
+                        <i data-lucide="history" class="empty-icon"></i>
+                        <p>No scan history yet. Run your first analysis from the Home tab!</p>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 3: ABOUT ==================== -->
+      <section class="view-section" id="viewAbout" style="display: none;">
+        <div class="content-container">
+          <div class="section-title-row">
+            <div>
+              <h1 class="view-heading">About CareerScan</h1>
+              <p class="view-subheading">AI-Powered Job Offer Risk Checker — Final Year Engineering Project.</p>
+            </div>
+          </div>
+
+          <div class="about-cards-grid">
+            <!-- Project Abstract Card -->
+            <div class="about-card">
+              <div class="about-card-header">
+                <i data-lucide="book-open" class="about-header-icon"></i>
+                <h2>Project Motivation & Abstract</h2>
+              </div>
+              <p>
+                Online employment scams have escalated drastically, particularly targeting university students, 
+                recent graduates, and desperate job seekers. Fraudsters increasingly impersonate reputable multinational 
+                corporations, leveraging platforms like Telegram, WhatsApp, and spoofed domains to execute advance-fee fraud, 
+                counterfeit check disbursement, and sensitive identity theft.
+              </p>
+              <p>
+                <strong>CareerScan</strong> was engineered as an automated decision-support system that inspects job 
+                descriptions, recruitment emails, and PDF offer letters to quantify scam probabilities and surface 
+                concrete, explainable red flags in real time.
+              </p>
+            </div>
+
+            <!-- Architecture Card -->
+            <div class="about-card">
+              <div class="about-card-header">
+                <i data-lucide="layers" class="about-header-icon"></i>
+                <h2>Dual-Engine System Architecture</h2>
+              </div>
+              <p>
+                CareerScan integrates both statistical machine learning and deterministic rule-based verification:
+              </p>
+              <div class="architecture-steps">
+                <div class="arch-step">
+                  <span class="step-num">1</span>
+                  <div>
+                    <strong>Document Ingestion & Normalization:</strong> 
+                    Parses text inputs or extracts unformatted streams from uploaded PDF offer letters using PyPDF.
+                  </div>
+                </div>
+                <div class="arch-step">
+                  <span class="step-num">2</span>
+                  <div>
+                    <strong>Deterministic Heuristics Engine:</strong> 
+                    Scans 5 core fraud vectors (Fake Check Schemes, Irreversible Payments, Chat-only Interviews, Unrealistic Salaries, Artificial Urgency).
+                  </div>
+                </div>
+                <div class="arch-step">
+                  <span class="step-num">3</span>
+                  <div>
+                    <strong>Scikit-Learn NLP Classifier:</strong> 
+                    Extracts bi-gram TF-IDF vectors and calculates scam probabilities via a trained Logistic Regression model.
+                  </div>
+                </div>
+                <div class="arch-step">
+                  <span class="step-num">4</span>
+                  <div>
+                    <strong>Domain & Corporate Impersonation Audit:</strong> 
+                    Cross-references corporate claims against public webmail providers (@gmail, @yahoo) and flags mismatch anomalies.
+                  </div>
+                </div>
+                <div class="arch-step">
+                  <span class="step-num">5</span>
+                  <div>
+                    <strong>SQLite Persistent Audit Log:</strong> 
+                    Maintains full scan histories for audits, tracking, and trend analysis.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Common Scams Guide -->
+            <div class="about-card">
+              <div class="about-card-header">
+                <i data-lucide="alert-octagon" class="about-header-icon"></i>
+                <h2>Anatomy of Prevalent Recruitment Scams</h2>
+              </div>
+              <div class="scam-types-list">
+                <div class="scam-type-item">
+                  <h4 class="scam-type-title"><i data-lucide="dollar-sign"></i> The Overpayment & Fake Equipment Check</h4>
+                  <p>The victim is mailed a counterfeit cashier's check to purchase home office gear from an 'approved vendor'. The victim transfers real funds via Zelle/Bitcoin, and days later the bank reverses the bad check, leaving the applicant in debt.</p>
+                </div>
+                <div class="scam-type-item">
+                  <h4 class="scam-type-title"><i data-lucide="send"></i> The Telegram / Anonymous Chat Interview</h4>
+                  <p>Interviews conducted exclusively through Telegram or WhatsApp text without video or verified phone calls. The scammer poses as an HR executive and extends immediate offers without verifying skills.</p>
+                </div>
+                <div class="scam-type-item">
+                  <h4 class="scam-type-title"><i data-lucide="award"></i> The Pay-to-Play Internship</h4>
+                  <p>Demands a 'refundable training deposit', 'registration fee', or 'server fee' before counter-signing the agreement. Legitimate internships always pay the candidate, never the reverse.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Limitations & Ethics -->
+            <div class="about-card">
+              <div class="about-card-header">
+                <i data-lucide="shield-alert" class="about-header-icon"></i>
+                <h2>Project Scope & Ethical Disclaimer</h2>
+              </div>
+              <p>
+                CareerScan is designed for educational and informational purposes as a computer engineering capstone project. 
+                Risk scores reflect algorithmic probability and pattern correlations. A low-risk score does not constitute a legal 
+                guarantee of authenticity; job seekers should always independently verify opportunities directly with company HR portals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- CareerScan Client Application Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
